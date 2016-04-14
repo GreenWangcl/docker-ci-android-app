@@ -29,9 +29,12 @@ ENV ANDROID_HOME /opt/android-sdk-linux
 ENV PATH $PATH:$ANDROID_HOME/tools
 
 # Install latest platform-tools, build-tools, android platforms, android support library and google repository.
-RUN ( sleep 5 && while [ 1 ]; do sleep 1; echo y; done ) | android update sdk -u -t platform-tools,build-tools-23.0.3,android-18,android-19,android-20,android-21,android-22,android-23,extra-android-support,extra-google-m2repository
+RUN ( sleep 5 && while [ 1 ]; do sleep 1; echo y; done ) | \
+    android update sdk -u -a -t \
+    platform-tools,build-tools-23.0.3,android-18,android-19,android-20,android-21,android-22,android-23,extra-android-support,extra-google-m2repository
 ENV PATH $PATH:$ANDROID_HOME/platform-tools
 ENV PATH $PATH:$ANDROID_HOME/build-tools/23.0.3
+
 
 # Install gradle
 RUN wget -q https://services.gradle.org/distributions/gradle-2.10-bin.zip && \
