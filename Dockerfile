@@ -16,11 +16,10 @@ RUN echo "deb http://mirrors.aliyun.com/ubuntu/ trusty main restricted universe 
     apt-get update -qq
 
 # Install common tools
-RUN apt-get install -y wget git unzip
+RUN apt-get install -qqy wget git unzip
 
 # Install Android SDK dependencies
-RUN apt-get install -y lib32stdc++6 lib32z1
-RUN apt-get install -y openjdk-7-jdk
+RUN apt-get install -qqy lib32stdc++6 lib32z1 openjdk-7-jdk
 
 # Install Android command line tools, see http://developer.android.com/sdk/index.html#downloads
 RUN wget -q http://dl.google.com/android/android-sdk_r24.4.1-linux.tgz && \
