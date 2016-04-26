@@ -33,7 +33,7 @@ ENV PATH $PATH:$ANDROID_HOME/tools
 # Install latest platform-tools, build-tools, android platforms, android support library and google repository.
 RUN ( sleep 5 && while [ 1 ]; do sleep 1; echo y; done ) | \
     android update sdk -u -a -t \
-    platform-tools,build-tools-23.0.3,android-18,android-19,android-20,android-21,android-22,android-23,extra-android-support,extra-google-m2repository
+    platform-tools,build-tools-22.0.0,build-tools-22.0.1,build-tools-23.0.0,build-tools-23.0.1,build-tools-23.0.2,build-tools-23.0.3,android-18,android-19,android-20,android-21,android-22,android-23,extra-android-support,extra-google-m2repository
 ENV PATH $PATH:$ANDROID_HOME/platform-tools
 ENV PATH $PATH:$ANDROID_HOME/build-tools/23.0.3
 
