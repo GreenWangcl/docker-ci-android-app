@@ -2,6 +2,9 @@ FROM ubuntu:14.04
 
 MAINTAINER GreenWang
 
+# Set LC_ALL
+RUN localedef -i en_US -f UTF-8 en_US.UTF-8
+
 WORKDIR /opt
 
 # Add i386 as Android SDK contains 32b binaries
@@ -60,9 +63,6 @@ RUN wget -q https://services.gradle.org/distributions/gradle-2.10-bin.zip && \
     rm -f gradle-2.10-bin.zip
 ENV GRADLE_HOME /opt/gradle-2.10
 ENV PATH $PATH:$GRADLE_HOME/bin
-
-# Set LC_ALL
-RUN echo "export LC_ALL=en_US.UTF-8" >> /etc/profile
 
 # Set workspace
 RUN mkdir -p /home/ci
