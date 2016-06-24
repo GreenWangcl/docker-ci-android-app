@@ -21,14 +21,16 @@ RUN apt-get update -qq
 RUN apt-get install -qqy wget git unzip
 
 # Install Linuxbrew
-RUN apt-get install -qqy build-essential curl python-setuptools ruby
+RUN apt-get install -qqy build-essential curl python-setuptools ruby2.0 \
+  && ln -sf ruby2.0 /usr/bin/ruby \
+  && ln -sf gem2.0 /usr/bin/gem
 RUN git clone --depth 1 https://github.com/Linuxbrew/brew.git $HOME/.linuxbrew
-ENV PATH $PATH:$HOME/.linuxbrew/bin:$HOME/.linuxbrew/sbin
-ENV MANPATH $HOME/.linuxbrew/share/man:$MANPATH
-ENV INFOPATH $HOME/.linuxbrew/share/info:$INFOPATH
+ENV PATH $PATH:/root/.linuxbrew/bin:/root/.linuxbrew/sbin
+ENV MANPATH /root/.linuxbrew/share/man:$MANPATH
+ENV INFOPATH /root/.linuxbrew/share/info:$INFOPATH
+RUN brew update
 
 # Install ruby 2.+
-RUN brew update
 RUN brew install ruby
 
 # Install bundler
