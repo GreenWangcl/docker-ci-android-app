@@ -18,6 +18,9 @@ Base on Ubuntu 14.04.
 - git
 - wget
 - unzip
+- [Linuxbrew](https://github.com/Linuxbrew/brew)
+- Ruby
+- Bundler
 
 ## License
 

@@ -20,6 +20,20 @@ RUN apt-get update -qq
 # Install common tools
 RUN apt-get install -qqy wget git unzip
 
+# Install Linuxbrew
+RUN apt-get install -qqy build-essential curl python-setuptools ruby
+RUN git clone --depth 1 https://github.com/Linuxbrew/brew.git $HOME/.linuxbrew
+ENV PATH $PATH:$HOME/.linuxbrew/bin:$HOME/.linuxbrew/sbin
+ENV MANPATH $HOME/.linuxbrew/share/man:$MANPATH
+ENV INFOPATH $HOME/.linuxbrew/share/info:$INFOPATH
+
+# Install ruby 2.+
+RUN brew update
+RUN brew install ruby
+
+# Install bundler
+RUN gem install bundler
+
 # Install Android SDK dependencies
 RUN apt-get install -qqy lib32stdc++6 lib32z1 openjdk-7-jdk
 
