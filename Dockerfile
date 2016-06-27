@@ -28,7 +28,7 @@ RUN apt-get install -qqy build-essential curl python-setuptools ruby2.0 \
   && ln -sf ruby2.0 /usr/bin/ruby \
   && ln -sf gem2.0 /usr/bin/gem
 RUN git clone --depth 1 https://github.com/Linuxbrew/brew.git $HOME/.linuxbrew
-ENV PATH $PATH:/root/.linuxbrew/bin:/root/.linuxbrew/sbin
+ENV PATH /root/.linuxbrew/bin:/root/.linuxbrew/sbin:$PATH
 ENV MANPATH /root/.linuxbrew/share/man:$MANPATH
 ENV INFOPATH /root/.linuxbrew/share/info:$INFOPATH
 RUN brew update
@@ -47,14 +47,14 @@ RUN wget -q http://dl.google.com/android/android-sdk_r24.4.1-linux.tgz && \
     tar xf android-sdk_r24.4.1-linux.tgz && \
     rm -f android-sdk_r24.4.1-linux.tgz
 ENV ANDROID_HOME /opt/android-sdk-linux
-ENV PATH $PATH:$ANDROID_HOME/tools
+ENV PATH $ANDROID_HOME/tools:$PATH
 
 # Install latest platform-tools, build-tools, android platforms, android support library and google repository.
 RUN ( sleep 5 && while [ 1 ]; do sleep 1; echo y; done ) | \
     android update sdk -u -a -t \
     platform-tools,build-tools-22.0.0,build-tools-22.0.1,build-tools-23.0.0,build-tools-23.0.1,build-tools-23.0.2,build-tools-23.0.3,android-18,android-19,android-20,android-21,android-22,android-23,extra-android-m2repository,extra-android-support,extra-google-m2repository
-ENV PATH $PATH:$ANDROID_HOME/platform-tools
-ENV PATH $PATH:$ANDROID_HOME/build-tools/23.0.3
+ENV PATH $ANDROID_HOME/platform-tools:$PATH
+ENV PATH $ANDROID_HOME/build-tools/23.0.3:$PATH
 
 
 # Install gradle
@@ -62,7 +62,7 @@ RUN wget -q https://services.gradle.org/distributions/gradle-2.10-bin.zip && \
     unzip gradle-2.10-bin.zip && \
     rm -f gradle-2.10-bin.zip
 ENV GRADLE_HOME /opt/gradle-2.10
-ENV PATH $PATH:$GRADLE_HOME/bin
+ENV PATH $GRADLE_HOME/bin:$PATH
 
 # Set workspace
 RUN mkdir -p /home/ci
