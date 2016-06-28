@@ -27,14 +27,6 @@ RUN apt-get install -qqy wget git unzip
 RUN apt-get install -qqy build-essential curl python-setuptools ruby2.0 \
   && ln -sf ruby2.0 /usr/bin/ruby \
   && ln -sf gem2.0 /usr/bin/gem
-RUN git clone --depth 1 https://github.com/Linuxbrew/brew.git $HOME/.linuxbrew
-ENV PATH /root/.linuxbrew/bin:/root/.linuxbrew/sbin:$PATH
-ENV MANPATH /root/.linuxbrew/share/man:$MANPATH
-ENV INFOPATH /root/.linuxbrew/share/info:$INFOPATH
-RUN brew update
-
-# Install ruby 2.+
-RUN brew install ruby
 
 # Install bundler
 RUN gem install bundler
