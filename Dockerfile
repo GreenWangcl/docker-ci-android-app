@@ -23,10 +23,16 @@ RUN apt-get update -qq
 # Install common tools
 RUN apt-get install -qqy wget git unzip
 
-# Install Linuxbrew
-RUN apt-get install -qqy build-essential curl python-setuptools ruby2.0 \
-  && ln -sf ruby2.0 /usr/bin/ruby \
-  && ln -sf gem2.0 /usr/bin/gem
+# Install Ruby
+RUN apt-get install -qqy curl
+RUN command curl -sSL https://rvm.io/mpapis.asc | gpg --import -
+RUN curl -L https://get.rvm.io | bash -s stable
+RUN source /etc/profile.d/rvm.sh
+RUN which rvm
+RUN rvm requirements
+RUN rvm install ruby
+RUN ruby -v
+RUN gem -v
 
 # Install bundler
 RUN gem install bundler
