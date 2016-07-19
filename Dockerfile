@@ -23,7 +23,7 @@ RUN apt-get update -qq
 # Install common tools
 RUN apt-get install -qqy wget git unzip
 
-# Install Linuxbrew
+# Install ruby
 RUN apt-get install -qqy build-essential curl python-setuptools ruby2.0 \
   && ln -sf ruby2.0 /usr/bin/ruby \
   && ln -sf gem2.0 /usr/bin/gem
@@ -48,6 +48,18 @@ RUN ( sleep 5 && while [ 1 ]; do sleep 1; echo y; done ) | \
 ENV PATH $ANDROID_HOME/platform-tools:$PATH
 ENV PATH $ANDROID_HOME/build-tools/23.0.3:$PATH
 
+# Install Android NDK dependencies
+RUN apt-get install -y make
+
+# Install Android NDK, see http://developer.android.com/ndk/downloads/index.html
+RUN wget -q https://dl.google.com/android/repository/android-ndk-r12b-linux-x86_64.zip && \
+    unzip android-ndk-r12b-linux-x86_64.zip && \
+    rm -f android-ndk-r12b-linux-x86_64.zip
+ENV ANDROID_NDK_HOME /opt/android-ndk-r12b
+ENV PATH $ANDROID_NDK_HOME:$PATH
+
+# Test NDK
+RUN which ndk-build
 
 # Install gradle
 RUN wget -q https://services.gradle.org/distributions/gradle-2.10-bin.zip && \

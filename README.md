@@ -21,6 +21,10 @@ Base on Ubuntu 14.04.
 - Ruby2.0
 - Bundler
 
+## Branch *ndk-build*
+
+- Include Android NDK, revision 12b
+
 ## License
 
 MIT license
